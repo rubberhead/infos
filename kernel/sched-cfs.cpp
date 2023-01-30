@@ -28,6 +28,8 @@ public:
 	 * Returns the friendly name of the algorithm, for debugging and selection purposes.
 	 */
 	const char* name() const override { return "cfs"; }
+	// Here `const char*` is `name`'s return type. `const` afterwards treats `*this` as `const` -- which 
+	// ensures immutability. 
 
     /**
      * Called during scheduler initialisation.
@@ -43,7 +45,8 @@ public:
 	 */
 	void add_to_runqueue(SchedulingEntity& entity) override
 	{
-		UniqueIRQLock l;
+		UniqueIRQLock l; // IRQ refers to "Interrupt ReQuest" (or any other r?)
+		// Is the lock used though? Only a declaration here
 		runqueue.enqueue(&entity);
 	}
 

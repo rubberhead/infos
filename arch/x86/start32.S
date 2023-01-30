@@ -24,14 +24,14 @@ start32:
     // Initialise a stack for clearing the flags, and calling zero_pages32.  The maximum depth of this
     // stack should be 4 bytes, as we're in 32-bit mode at this point, and only use the stack for clearing
     // EFLAGS, and using the zero page helper function.
-    mov $0x1000, %esp
+    mov $0x1000, %esp 
 
     // Reset EFLAGS
-    pushl $0
+    pushl $0 // ZC: EFLAGS is the status register of an x86-32 CPU. 
     popf
 
     // Load a null IDT
-    lidt idtp
+    lidt idtp // ZC: IDT is the Interrupt Vector Table of the CPU.
 
     // Prepare the initial page tables, with an identity map for
     // lower memory, and a corresponding mapping for the higher address space.

@@ -109,7 +109,7 @@ namespace infos
 						uint8_t G : 1;
 
 						uint8_t ra_0_6;
-					} __packed;
+					} __packed; // Both variants take up 8B as a result --ZC
 				};
 			} __packed;
 			
