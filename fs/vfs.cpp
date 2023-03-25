@@ -68,6 +68,10 @@ File* VirtualFilesystem::open(const String& path, int flags)
 	if (!node) return NULL;
 	if (!node->pn()) return NULL;	
 	
+	fs_log.message(
+		LogLevel::DEBUG, 
+		"[VFS::open] Opening file..."
+	);
 	return node->pn()->open();
 }
 

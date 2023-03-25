@@ -33,6 +33,20 @@ namespace infos
 				asm volatile("outl %%eax, %%dx" :: "a"(data), "d"((uint16_t)port));
 			}
 			
+			/** 
+			 * @brief
+			 * Wrapper around the `INB` x86 instruction: 
+			 * Transfers a byte from the immediate port into some address. 
+			 * 
+			 * @details
+			 * tl;dr: 
+			 * 
+			 *     inb (<port> => %dx) -> (%al => <ret>) 
+			 * 
+			 * 
+			 * @param port Port which is to be stored in (%dx). 
+			 * @return Byte value transfered from block device into (%al). 
+			 */
 			inline uint8_t __inb(int port)
 			{
 				uint8_t ret;
@@ -54,6 +68,19 @@ namespace infos
 				return ret;
 			}
 			
+			/**
+			 * @brief 
+			 * Wraps around the `INSW` x86 instruction: 
+			 * Transfers string of WORDs from the (%dx)-specified port into (%di)/(%edi)-specified 
+			 * address. (%di)/(%edi) are "index registers" and thus can be automatically incremented 
+			 * or decremented. 
+			 * 
+			 * Dunno the details of this asm syntax but this works.
+			 * 
+			 * @param port ...
+			 * @param buffer ...
+			 * @param count ...
+			 */
 			inline void __insw(uint16_t port, uintptr_t buffer, size_t count)
 			{
 				asm volatile("cld\n\trepnz insw" : "=D"(buffer), "=c"(count)

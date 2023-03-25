@@ -1,10 +1,11 @@
 /* SPDX-License-Identifier: MIT */
 #pragma once
 
-
 #include <infos/drivers/block/block-device.h>
 #include <infos/drivers/block/block-device-partition.h>
 #include <infos/util/list.h>
+
+#include <infos/drivers/ata/page-cache.h>
 
 namespace infos {
     namespace drivers {
@@ -33,6 +34,8 @@ namespace infos {
                 int _channel, _drive;
 
                 uint32_t _signature, _caps, _cmdsets, _size;
+
+                Cache _cache; 
 
                 uint8_t ata_read(int reg);
                 void ata_read_buffer(int reg, void *buffer, size_t size);
